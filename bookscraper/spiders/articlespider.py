@@ -4,7 +4,7 @@ from bookscraper.items import PokeItem
 class ExempleSpider(scrapy.Spider):
     name = 'offres'
     allowed_domains = ['labonneboite.pole-emploi.fr']
-    start_urls = ['https://labonneboite.pole-emploi.fr/entreprises?j=%C3%89tudes+et+d%C3%A9veloppement+informatique&l=Valenciennes+59300&naf=&h=1&d=50&sort=smart&ij=&occupation=etudes-et-developpement-informatique&lat=50.358552&lon=3.510438&departments=']
+    start_urls = ['https://labonneboite.pole-emploi.fr/entreprises?j=%C3%89tudes+et+d%C3%A9veloppement+informatique&l=Valenciennes+59300&naf=&h=1&d=30&sort=smart&ij=&occupation=etudes-et-developpement-informatique&lat=50.358552&lon=3.510438&departments=']
 
     
     #fonction doit s'occuper de parcourir la liste des produits sur chaque page et de suivre le lien de chaque produit
@@ -34,9 +34,9 @@ class ExempleSpider(scrapy.Spider):
             active_page = response.css('li.page-item.active').get()
             next_page_link = response.css('li.page-item.active + li a::attr(href)').get()
             
-            # Si la page active n'est pas la dernière, passer à la page suivante
-            if active_page and not next_page_link:
-                next_page_link = response.css('li.page-item.active + li + li a::attr(href)').get()
+            # # Si la page active n'est pas la dernière, passer à la page suivante
+            # if active_page and not next_page_link:
+            #     next_page_link = response.css('li.page-item.active + li + li a::attr(href)').get()
 
             if next_page_link:
                 next_page_url = response.urljoin(next_page_link)

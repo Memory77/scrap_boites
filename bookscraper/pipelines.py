@@ -10,6 +10,21 @@ from itemadapter import ItemAdapter
 class ExemplePipeline:
  
     def process_item(self, item, spider):
+
+        # value = item['telephone']
+        # if value == 'Modifier ces informations':
+        #     value = ''
+
+
+        adapter = ItemAdapter(item)
+        value_tel = adapter.get('telephone')
+
+        # if value_tel == 'Modifier ces informations':
+        #     value_tel = ""
+
+        adapter['telephone'] = [cat for cat in adapter['telephone'] if cat.lower() != 'Modifier ces informations']
+        adapter['telephone'] = ''.join(adapter['telephone'])
+        
         # adapter = ItemAdapter(item)
         # value_tel = adapter.get('telephone')
         # if value_tel:
